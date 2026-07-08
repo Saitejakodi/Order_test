@@ -43,8 +43,13 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Make Gradle Wrapper Executable
+        working-directory: Gradle_Project
+        run: chmod +x gradlew
+
       - name: Run Order Test
-        run: .\gradlew orderTest
+        working-directory: Gradle_Project
+        run: ./gradlew orderTest
         env:
           JAVA_TOOL_OPTIONS: >
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
