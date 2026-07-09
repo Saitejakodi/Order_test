@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - check
   pull_request:
 
 jobs:
