@@ -45,11 +45,11 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Make Gradle Wrapper Executable
-        working-directory: Gradle_Project
+        working-directory: Gradle_project
         run: chmod +x gradlew
 
       - name: Run Order Test
-        working-directory: Gradle_Project
+        working-directory: Gradle_project
         run: ./gradlew orderTest
         env:
           JAVA_TOOL_OPTIONS: >
