@@ -16,6 +16,7 @@ val slf4jVersion = "2.0.17"
 val testcontainersVersion = "2.0.5"
 val flywayVersion = "10.22.0"
 val postgresqlVersion = "42.7.4"
+val mysqlVersion = "9.3.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_22
@@ -44,6 +45,8 @@ dependencies {
     testImplementation("org.flywaydb:flyway-core:$flywayVersion")
     testImplementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
     testImplementation("org.postgresql:postgresql:${postgresqlVersion}")
+//    testImplementation("com.mysql:mysql-connector-j:${mysqlVersion}")
+//    testImplementation("org.flywaydb:flyway-mysql:${flywayVersion}")
 
     testImplementation("org.testcontainers:testcontainers-postgresql:${testcontainersVersion}")
 }

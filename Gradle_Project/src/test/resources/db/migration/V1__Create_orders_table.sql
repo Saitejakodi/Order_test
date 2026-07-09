@@ -1,0 +1,17 @@
+ CREATE TABLE IF NOT EXISTS orders (
+    id SERIAL PRIMARY KEY,
+    sku VARCHAR(100) NOT NULL,
+    qty INTEGER NOT NULL,
+    price DOUBLE PRECISION NOT NULL,
+    order_date DATE NOT NULL,
+    shipped BOOLEAN NOT NULL
+ );
+
+-- CREATE TABLE IF NOT EXISTS orders (
+--    id INT AUTO_INCREMENT PRIMARY KEY,
+--    sku VARCHAR(100) NOT NULL,
+--    qty INT NOT NULL,
+--    price DOUBLE NOT NULL,
+--    order_date DATE NOT NULL,
+--    shipped BOOLEAN NOT NULL
+-- );

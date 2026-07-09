@@ -11,6 +11,62 @@ import java.sql.SQLException;
 
 public class OrderRepository {
 
+    public Order findBySku(String sku) {
+
+        String sql = """
+            SELECT sku, qty, price, order_date, shipped
+            FROM orders
+            WHERE sku = ?
+            """;
+
+        try (
+                Connection connection = DatabaseConfig.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+
+            statement.setString(1, sku);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return new Order(
+                        rs.getString("sku"),
+                        rs.getInt("qty"),
+                        rs.getDouble("price"),
+                        rs.getDate("order_date").toLocalDate(),
+                        rs.getBoolean("shipped")
+                );
+            }
+
+            return null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public long countShipped() {
+
+        String sql = """
+            SELECT COUNT(*)
+            FROM orders
+            WHERE shipped = true
+            """;
+
+        try (
+                Connection connection = DatabaseConfig.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql);
+                ResultSet rs = statement.executeQuery()
+        ) {
+
+            rs.next();
+            return rs.getLong(1);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void save(Order order) {
 
         String sql = """
@@ -57,7 +113,9 @@ public class OrderRepository {
 
     public void reset() {
 
-        String sql = "TRUNCATE TABLE orders RESTART IDENTITY";
+//        String sql = "TRUNCATE TABLE orders RESTART IDENTITY";
+        String sql = "TRUNCATE TABLE orders";
+
 
         try (
                 Connection connection = DatabaseConfig.getConnection();
