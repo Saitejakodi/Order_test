@@ -1,6 +1,6 @@
 package com.ust.sdet.support;
 
-import com.ust.sdet.api.dbframework.support.TestEnvironment;
+import com.ust.sdet.support.TestEnvironment;
 
 public final class Config {
 

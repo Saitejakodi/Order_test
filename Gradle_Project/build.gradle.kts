@@ -1,5 +1,6 @@
 plugins {
     java
+    id("io.qameta.allure") version "2.12.0"
 }
 
 group = "com.ust.sdet"
@@ -16,6 +17,7 @@ val slf4jVersion = "2.0.17"
 val testcontainersVersion = "2.0.5"
 val flywayVersion = "10.22.0"
 val postgresqlVersion = "42.7.4"
+val mysqlVersion = "9.3.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_22
@@ -36,6 +38,7 @@ dependencies {
     testImplementation("io.cucumber:cucumber-picocontainer")
     testImplementation("org.junit.platform:junit-platform-suite")
     testImplementation("io.qameta.allure:allure-cucumber7-jvm")
+    testImplementation("io.qameta.allure:allure-junit5")
     testImplementation("com.aventstack:extentreports:$extentVersion")
     testImplementation("tech.grasshopper:extentreports-cucumber7-adapter:$extentCucumberAdapterVersion")
     testImplementation("org.slf4j:slf4j-simple:$slf4jVersion")
@@ -44,6 +47,8 @@ dependencies {
     testImplementation("org.flywaydb:flyway-core:$flywayVersion")
     testImplementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
     testImplementation("org.postgresql:postgresql:${postgresqlVersion}")
+//    testImplementation("com.mysql:mysql-connector-j:${mysqlVersion}")
+//    testImplementation("org.flywaydb:flyway-mysql:${flywayVersion}")
 
     testImplementation("org.testcontainers:testcontainers-postgresql:${testcontainersVersion}")
 }

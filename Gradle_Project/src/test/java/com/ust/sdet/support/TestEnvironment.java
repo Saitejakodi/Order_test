@@ -1,4 +1,4 @@
-package com.ust.sdet.api.dbframework.support;
+package com.ust.sdet.support;
 
 import java.io.IOException;
 import java.nio.file.Files;
