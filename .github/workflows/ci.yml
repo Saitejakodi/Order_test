@@ -33,6 +33,11 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v4
+<<<<<<< HEAD
+=======
+        with:
+          fetch-depth: 0
+>>>>>>> b565293 (allure added)
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -55,3 +60,23 @@ jobs:
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
             -Ddb.user=postgres
             -Ddb.password=postgres
+<<<<<<< HEAD
+=======
+
+      - name: Generate Allure Report
+        if: always()
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: Gradle_Project/build/allure-results
+          allure_report: allure-report
+          gh_pages: gh-pages
+          allure_history: allure-history
+
+      - name: Deploy report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+>>>>>>> b565293 (allure added)
