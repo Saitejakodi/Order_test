@@ -58,6 +58,12 @@ jobs:
             -Ddb.user=postgres
             -Ddb.password=postgres
 
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
       - name: Generate Allure Report
         if: always()
         uses: simple-elf/allure-report-action@master

@@ -1,16 +1,46 @@
 [
   {
-    "name": "Flaky tests",
-    "matchedStatuses": ["failed", "broken"],
-    "messageRegex": ".*(timeout|stale element|connection reset).*",
-    "flaky": true
+    "name": "Product Defects",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*AssertionFailedError.*"
   },
   {
-    "name": "Test defects (broken)",
+    "name": "Database Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*(SQLException|PSQLException).*"
+  },
+  {
+    "name": "Flyway Migration Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*Flyway.*"
+  },
+  {
+    "name": "Connection Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*(connection refused|connection reset).*"
+  },
+  {
+    "name": "Timeout Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*TimeoutException.*"
+  },
+  {
+    "name": "Locator Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*(NoSuchElementException|StaleElementReferenceException).*"
+  },
+  {
+    "name": "Configuration Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*(IllegalStateException|IllegalArgumentException).*"
+  },
+  {
+    "name": "Infrastructure Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*(Docker|ContainerLaunchException).*"
+  },
+  {
+    "name": "Test Defects",
     "matchedStatuses": ["broken"]
-  },
-  {
-    "name": "Product defects",
-    "matchedStatuses": ["failed"]
   }
 ]
