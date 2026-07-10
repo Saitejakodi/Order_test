@@ -1,33 +1,18 @@
 [
   {
-    "name": "Product Defects",
+    "name": "Assertion Failures",
     "matchedStatuses": ["failed"],
     "messageRegex": ".*AssertionFailedError.*"
   },
   {
+    "name": "UI Automation Issues",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*(NoSuchElementException|StaleElementReferenceException|TimeoutException).*"
+  },
+  {
     "name": "Database Issues",
     "matchedStatuses": ["broken"],
-    "messageRegex": ".*(SQLException|PSQLException).*"
-  },
-  {
-    "name": "Flyway Migration Issues",
-    "matchedStatuses": ["broken"],
-    "messageRegex": ".*Flyway.*"
-  },
-  {
-    "name": "Connection Issues",
-    "matchedStatuses": ["broken"],
-    "messageRegex": ".*(connection refused|connection reset).*"
-  },
-  {
-    "name": "Timeout Issues",
-    "matchedStatuses": ["broken"],
-    "messageRegex": ".*TimeoutException.*"
-  },
-  {
-    "name": "Locator Issues",
-    "matchedStatuses": ["broken"],
-    "messageRegex": ".*(NoSuchElementException|StaleElementReferenceException).*"
+    "messageRegex": ".*(SQLException|PSQLException|Flyway).*"
   },
   {
     "name": "Configuration Issues",
@@ -37,10 +22,10 @@
   {
     "name": "Infrastructure Issues",
     "matchedStatuses": ["broken"],
-    "messageRegex": ".*(Docker|ContainerLaunchException).*"
+    "messageRegex": ".*(ContainerLaunchException|Docker|connection refused|connection reset).*"
   },
   {
-    "name": "Test Defects",
+    "name": "Other Failures",
     "matchedStatuses": ["broken"]
   }
 ]
