@@ -1,4 +1,4 @@
-package com.ust.sdet.bdd;
+package com.ust.sdet.bdd.world;
 
 import com.ust.sdet.pages.*;
 import com.ust.sdet.pages.components.Header;

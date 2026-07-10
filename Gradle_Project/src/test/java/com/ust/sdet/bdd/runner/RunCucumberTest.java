@@ -1,4 +1,4 @@
-package com.ust.sdet.bdd;
+package com.ust.sdet.bdd.runner;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;

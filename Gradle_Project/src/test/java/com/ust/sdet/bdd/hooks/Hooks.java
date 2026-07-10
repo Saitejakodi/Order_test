@@ -1,5 +1,6 @@
-package com.ust.sdet.bdd;
+package com.ust.sdet.bdd.hooks;
 
+import com.ust.sdet.bdd.world.World;
 import com.ust.sdet.support.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

@@ -1,12 +1,10 @@
-package com.ust.sdet.bdd;
+package com.ust.sdet.bdd.steps;
 
-import com.ust.sdet.pages.CatalogPage;
+import com.ust.sdet.bdd.world.World;
 import com.ust.sdet.pages.LoginPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

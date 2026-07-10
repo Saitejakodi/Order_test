@@ -1,7 +1,11 @@
+// Package declaration for the order repository layer
 package com.ust.sdet.repository;
 
+// Imports for database access, the order model, and logging
 import com.ust.sdet.db.DatabaseConfig;
 import com.ust.sdet.model.Order;
+import com.ust.sdet.support.LoggerUtil;
+import org.slf4j.Logger;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,9 +13,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Repository class responsible for CRUD-style order operations against the database
 public class OrderRepository {
 
+    // Logger for repository actions and errors
+    private static final Logger log = LoggerUtil.getLogger(OrderRepository.class);
+
+    // Finds an order by its SKU value
     public Order findBySku(String sku) {
+
+        log.info("[REPOSITORY] Finding order with SKU: {}", sku);
 
         String sql = """
             SELECT sku, qty, price, order_date, shipped
@@ -29,6 +40,9 @@ public class OrderRepository {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
+
+                log.info("[REPOSITORY] Order found for SKU: {}", sku);
+
                 return new Order(
                         rs.getString("sku"),
                         rs.getInt("qty"),
@@ -38,14 +52,22 @@ public class OrderRepository {
                 );
             }
 
+            log.warn("[REPOSITORY] No order found for SKU: {}", sku);
+
             return null;
 
         } catch (SQLException e) {
+
+            log.error("[REPOSITORY] Failed to find order with SKU: {}", sku, e);
+
             throw new RuntimeException(e);
         }
     }
 
+    // Counts the number of shipped orders in the database
     public long countShipped() {
+
+        log.info("[REPOSITORY] Counting shipped orders");
 
         String sql = """
             SELECT COUNT(*)
@@ -60,14 +82,25 @@ public class OrderRepository {
         ) {
 
             rs.next();
-            return rs.getLong(1);
+
+            long count = rs.getLong(1);
+
+            log.info("[REPOSITORY] Shipped order count: {}", count);
+
+            return count;
 
         } catch (SQLException e) {
+
+            log.error("[REPOSITORY] Failed to count shipped orders", e);
+
             throw new RuntimeException(e);
         }
     }
 
+    // Persists a new order into the database
     public void save(Order order) {
+
+        log.info("[REPOSITORY] Saving order with SKU: {}", order.sku());
 
         String sql = """
                 INSERT INTO orders
@@ -88,12 +121,20 @@ public class OrderRepository {
 
             statement.executeUpdate();
 
+            log.info("[REPOSITORY] Order saved successfully");
+
         } catch (SQLException e) {
+
+            log.error("[REPOSITORY] Failed to save order with SKU: {}", order.sku(), e);
+
             throw new RuntimeException(e);
         }
     }
 
+    // Counts all orders in the database
     public long count() {
+
+        log.info("[REPOSITORY] Counting all orders");
 
         String sql = "SELECT COUNT(*) FROM orders";
 
@@ -104,18 +145,27 @@ public class OrderRepository {
         ) {
 
             rs.next();
-            return rs.getLong(1);
+
+            long count = rs.getLong(1);
+
+            log.info("[REPOSITORY] Total order count: {}", count);
+
+            return count;
 
         } catch (SQLException e) {
+
+            log.error("[REPOSITORY] Failed to count orders", e);
+
             throw new RuntimeException(e);
         }
     }
 
+    // Resets the orders table for clean test execution
     public void reset() {
 
-//        String sql = "TRUNCATE TABLE orders RESTART IDENTITY";
-        String sql = "TRUNCATE TABLE orders";
+        log.info("[REPOSITORY] Resetting orders table");
 
+        String sql = "TRUNCATE TABLE orders RESTART IDENTITY";
 
         try (
                 Connection connection = DatabaseConfig.getConnection();
@@ -124,7 +174,12 @@ public class OrderRepository {
 
             statement.executeUpdate();
 
+            log.info("[REPOSITORY] Orders table reset successfully");
+
         } catch (SQLException e) {
+
+            log.error("[REPOSITORY] Failed to reset orders table", e);
+
             throw new RuntimeException(e);
         }
     }

@@ -1,3 +1,4 @@
+// Package declaration for environment and configuration loading utilities
 package com.ust.sdet.support;
 
 import java.io.IOException;
@@ -9,13 +10,19 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+// Utility class that loads environment values from JVM properties, system environment, or a local .env file
 public final class TestEnvironment {
+    // The environment file discovered for the current project
     private static final Path ENV_FILE = findEnvFile();
+
+    // Local environment values loaded from the discovered .env file
     private static final Map<String, String> LOCAL_ENV = loadLocalEnv(ENV_FILE);
 
+    // Prevent instantiation of the utility class
     private TestEnvironment() {
     }
 
+    // Returns a required environment value or throws an error if it is missing
     public static String required(String name) {
         String value = optional(name, null);
         if (value == null) {
@@ -28,6 +35,7 @@ public final class TestEnvironment {
         return value;
     }
 
+    // Returns an environment value from system properties, environment variables, or the .env file
     public static String optional(String name, String fallback) {
         String systemValue = System.getProperty(name);
         if (systemValue != null && !systemValue.isBlank()) {
@@ -43,10 +51,12 @@ public final class TestEnvironment {
         return fileValue == null || fileValue.isBlank() ? fallback : fileValue;
     }
 
+    // Returns the path of the loaded environment file, if any
     public static String loadedEnvFile() {
         return ENV_FILE == null ? "none" : ENV_FILE.toString();
     }
 
+    // Describes where a configuration value was sourced from
     public static String sourceOf(String name) {
         String systemValue = System.getProperty(name);
         if (systemValue != null && !systemValue.isBlank()) {
@@ -62,6 +72,7 @@ public final class TestEnvironment {
         return "not configured";
     }
 
+    // Searches for a .env file starting from the current directory or the class location
     private static Path findEnvFile() {
         String explicitPath = System.getProperty("envFile");
         if (explicitPath == null || explicitPath.isBlank()) {
@@ -95,6 +106,7 @@ public final class TestEnvironment {
         return null;
     }
 
+    // Walks upward from a starting point to find a .env file
     private static Path findUpwards(Path startingPoint) {
         Path current = Files.isDirectory(startingPoint) ? startingPoint : startingPoint.getParent();
         while (current != null) {
@@ -107,6 +119,7 @@ public final class TestEnvironment {
         return null;
     }
 
+    // Loads key-value pairs from the discovered .env file
     private static Map<String, String> loadLocalEnv(Path envFile) {
         if (envFile == null) {
             return Map.of();
@@ -131,6 +144,7 @@ public final class TestEnvironment {
         return values;
     }
 
+    // Removes surrounding quotes from a value loaded from the .env file
     private static String unquote(String value) {
         if (value.length() >= 2) {
             char first = value.charAt(0);

@@ -54,7 +54,7 @@ jobs:
 
       - name: Run Order Test
         working-directory: Gradle_Project
-        run: ./gradlew orderTest --no-configuration-cache
+        run: ./gradlew integrationTest --no-configuration-cache
         env:
           JAVA_TOOL_OPTIONS: >
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
