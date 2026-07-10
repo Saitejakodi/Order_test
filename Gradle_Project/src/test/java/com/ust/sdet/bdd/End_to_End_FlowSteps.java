@@ -1,6 +1,5 @@
 package com.ust.sdet.bdd;
 
-
 import com.ust.sdet.pages.LoginPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
