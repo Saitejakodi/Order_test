@@ -58,7 +58,6 @@ public class OrderTest {
         );
 
         assertEquals(2, repo.count());
-        
     }
 
     @Test
