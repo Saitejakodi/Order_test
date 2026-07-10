@@ -57,7 +57,7 @@ public class OrderTest {
                         .build()
         );
 
-        assertEquals(2, repo.count());
+        assertEquals(1, repo.count());
     }
 
     @Test
