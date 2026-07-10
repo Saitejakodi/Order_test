@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
   order-test:
 
@@ -58,7 +61,8 @@ jobs:
             -Ddb.user=postgres
             -Ddb.password=postgres
 
-      - name: Checkout gh-pages
+      - name: Checkout gh-pages branch
+        if: always()
         uses: actions/checkout@v4
         with:
           ref: gh-pages
