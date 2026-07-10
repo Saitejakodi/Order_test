@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
 
-permissions:
-  contents: write
-
 jobs:
   order-test:
 
@@ -54,19 +51,12 @@ jobs:
 
       - name: Run Order Test
         working-directory: Gradle_Project
-        run: ./gradlew orderTest --no-configuration-cache
+        run: ./gradlew orderTest
         env:
           JAVA_TOOL_OPTIONS: >
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
             -Ddb.user=postgres
             -Ddb.password=postgres
-
-      - name: Checkout gh-pages branch
-        if: always()
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-          path: gh-pages
 
       - name: Generate Allure Report
         if: always()
