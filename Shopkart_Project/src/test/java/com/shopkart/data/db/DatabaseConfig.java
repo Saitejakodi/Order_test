@@ -1,25 +1,22 @@
 package com.shopkart.data.db;
 
-import com.shopkart.config.Env;
+import com.shopkart.data.secret.Secrets;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public final class DatabaseConfig {
 
-    private DatabaseConfig() {}
+    private DatabaseConfig() {
+    }
 
-    public static String url() {
-        return String.format(
-                "jdbc:mysql://%s:%s/%s",
-                Env.get("DB_HOST"),
-                Env.get("DB_PORT"),
-                Env.get("DB_NAME")
+    public static Connection getConnection() throws SQLException {
+
+        return DriverManager.getConnection(
+                Secrets.get("DB_JDBC_URL"),
+                Secrets.get("DB_USER"),
+                Secrets.get("DB_PASSWORD")
         );
-    }
-
-    public static String username() {
-        return Env.get("DB_USER");
-    }
-
-    public static String password() {
-        return Env.get("DB_PASSWORD");
     }
 }

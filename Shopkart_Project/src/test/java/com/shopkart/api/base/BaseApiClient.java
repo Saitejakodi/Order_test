@@ -1,25 +1,19 @@
 package com.shopkart.api.base;
 
-import com.shopkart.config.AppConfig;
-import io.restassured.RestAssured;
+import com.shopkart.api.ApiSpec;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
 public abstract class BaseApiClient {
 
-    static {
-        RestAssured.baseURI = AppConfig.API_BASE_URL;
-    }
-
     protected RequestSpecification request() {
 
         return given()
-                .contentType("application/json")
-                .accept("application/json");
+                .spec(ApiSpec.requestSpec());
     }
 
-    protected RequestSpecification authenticated(String token) {
+    protected RequestSpecification authorized(String token) {
 
         return request()
                 .header("Authorization", "Bearer " + token);

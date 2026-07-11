@@ -1,15 +1,23 @@
 package com.shopkart.config;
 
+import com.shopkart.data.secret.Secrets;
+
 public final class AppConfig {
 
     private AppConfig() {
     }
 
-    public static final String BASE_URL = "http://localhost:8080";
+    public static final String BASE_URL =
+            Secrets.get("SHOPKART_BASE_URL");
 
-    public static final String API_BASE_URL = BASE_URL + "/api";
+    public static final String API_BASE_URL =
+            Secrets.get("SHOPKART_API_BASE_URL");
 
-    public static final String BROWSER = "chrome";
+    public static final String BROWSER =
+            Secrets.get("BROWSER");
 
-    public static final int TIMEOUT = 10000;
+    public static final long TIMEOUT =
+            Long.parseLong(
+                    Secrets.get("UI_TIMEOUT_MS")
+            );
 }
