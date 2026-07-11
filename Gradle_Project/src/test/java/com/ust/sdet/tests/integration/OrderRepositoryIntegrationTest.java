@@ -11,10 +11,7 @@ import com.ust.sdet.model.Order;
 import com.ust.sdet.repository.OrderRepository;
 import com.ust.sdet.support.LoggerUtil;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,6 +32,11 @@ public class OrderRepositoryIntegrationTest {
     // Applies database migrations before the test class runs
     @BeforeAll
     static void migrateDatabase() {
+
+        Assumptions.assumeTrue(
+                Boolean.getBoolean("run.integration"),
+                "Skipping integration tests (PostgreSQL not available locally)"
+        );
 
         log.info("=================================================");
         log.info("[TEST] Starting Database Integration Tests");

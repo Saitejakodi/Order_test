@@ -57,6 +57,7 @@ jobs:
         run: ./gradlew integrationTest --no-configuration-cache
         env:
           JAVA_TOOL_OPTIONS: >
+            -Drun.integration=true
             -Ddb.url=jdbc:postgresql://localhost:5432/testdb
             -Ddb.user=postgres
             -Ddb.password=postgres
