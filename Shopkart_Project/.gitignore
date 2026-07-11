@@ -1,11 +1,15 @@
-.gradle
+.gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 .kotlin
 
+.vscode/
 ### IntelliJ IDEA ###
+.idea/
+**/.idea/
+*.jar
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
